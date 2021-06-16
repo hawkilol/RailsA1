@@ -1,0 +1,90 @@
+<p id="notice"><%= notice %></p>
+<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
+<link href="https://bootswatch.com/5/solar/bootstrap.min.css" rel ="stylesheet" type="text/css">
+
+
+<h1>Friends</h1>
+
+<table class= "table table-striped">
+  <thead>
+    <tr>
+      <th>Email</th>
+      
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+   
+
+  <tbody>
+
+      <tr>
+          
+          
+          
+          
+          <% for friendship in current_user.friendships  %>
+            <td><%=h friendship.friend.email %></td><br>
+          <%end%>
+          
+          <td><%= link_to "Remove", friendship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          
+      </tr>
+    
+  </tbody>
+</table>
+<h2> Friended by Users </h2>
+
+<table class= "table table-striped">
+  <thead>
+    <tr>
+      <th>Email</th>
+      
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+   
+
+  <tbody>
+
+      <tr>
+          
+          
+          
+          
+          <% for user in current_user.inverse_friends %>
+              <td><%=h user.email%><%=h user.id%></td><br>
+          <%end%>
+          
+          <td><%= link_to "Remove", friendship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          
+      </tr>
+    
+  </tbody>
+</table>
+
+
+
+
+<h2> Users to add</h2>
+
+    
+<ul class="list-group">
+  <% for user in User.all%>
+  <%if current_user.id != user.id%>
+  
+  <li class="list-group-item"><strong><%=h user.email%></strong>
+          
+          <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post%>
+          </li>
+
+   <%end%>
+  <%end%>
+  
+</ul>
+
+
+<br>
+
+

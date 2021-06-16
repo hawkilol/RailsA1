@@ -1,0 +1,101 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+
+    <title>Jumbotron Template for Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/jumbotron/">
+    <link href="https://bootswatch.com/5/solar/bootstrap.min.css" rel ="stylesheet" type="text/css">
+
+    <!-- Bootstrap core CSS  https://bootswatch.com/5/quartz/bootstrap.min.css https://bootswatch.com/5/vapor/bootstrap.min.css" rel ="stylesheet" type="text/css-->
+    
+
+    <!-- Custom styles for this template -->
+    
+  </head>
+
+  <body>
+
+
+    <main role="main">
+
+      <!-- Main jumbotron for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <div class="container">
+          <h1 class="display-3" style="color: #189ddb" >Here you can make friends and talk with 'em all!! </h1>
+          <% if current_user.present?%>
+         
+           
+
+            <p>Hello! <%= current_user.email%></p>
+            <p><a class="btn btn-primary btn-lg" href="/friends" role="button"> Add Friends &raquo;</a></p>
+
+          <%else%>
+          
+            <p>Log in to start making friends!</p>
+
+           <p><%= button_to "Sign In", new_user_session_path, method: :post, class:"btn btn-success btn-lg"%></p> 
+           <p><%= button_to "Sign Up", new_user_session_path, method: :post, class:"btn btn-warning btn-lg"%></p>
+
+          <%end%>
+
+            
+
+        </div>
+      </div>
+      
+
+
+      
+      <br/>
+      <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+          <div class="col-md-4">
+            <% if current_user.present?%>
+                  
+                        
+                  <h2> User List</h2>
+
+
+                    
+                    <ul class="list-group">
+                      <% for user in User.all%>
+                        <li class="list-group-item"><strong><%=h user.email%></strong>
+          
+                              </li>
+                                <%end%>
+  
+                    </ul>
+                    <p><a class="btn btn-secondary" href="/friends" role="button">Add them? &raquo;</a></p>
+                  
+                  <% end %>
+          </div>
+          
+        </div>
+
+        <hr>
+
+      </div> <!-- /container -->
+
+    </main>
+<% if user_signed_in? %>
+  <%= button_to "Sign Out", destroy_user_session_path, method: :delete,class: "btn btn-danger"%>
+<%end%>
+   
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    
+    
+  </body>
+</html>
+
+
+
