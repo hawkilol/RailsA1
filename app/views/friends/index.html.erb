@@ -9,7 +9,7 @@
   <thead>
     <tr>
       <th>Email</th>
-      
+      <th>User Id</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,15 +19,14 @@
   <tbody>
 
       <tr>
-          
-          
-          
-          
           <% for friendship in current_user.friendships  %>
-            <td><%=h friendship.friend.email %></td><br>
+            <td><%=h friendship.friend.email %></td>
+
+            <td><%=h friendship.friend.id%> </td>
+            <td><%= link_to "Remove", friendship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <%end%>
           
-          <td><%= link_to "Remove", friendship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          
           
       </tr>
     
@@ -39,7 +38,7 @@
   <thead>
     <tr>
       <th>Email</th>
-      
+      <th>User Id</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -49,18 +48,16 @@
   <tbody>
 
       <tr>
-          
-          
-          
-          
           <% for user in current_user.inverse_friends %>
-              <td><%=h user.email%><%=h user.id%></td><br>
+              <td><%=h user.email%></td>
+              <td><%=h user.id%></td>
+              <td><%= link_to "Remove", friendship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <%end%>
           
-          <td><%= link_to "Remove", friendship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            
+          
           
       </tr>
-    
   </tbody>
 </table>
 
@@ -72,13 +69,15 @@
     
 <ul class="list-group">
   <% for user in User.all%>
-  <%if current_user.id != user.id%>
-  
-  <li class="list-group-item"><strong><%=h user.email%></strong>
-          
-          <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post%>
-          </li>
-
+    <% for friendship in current_user.friendships%>
+                <%if current_user.id != user.id%>
+                  
+                  <li class="list-group-item"><strong><%=h user.email%></strong>
+                    <%if friendship.friend.id != user.id%>
+                     <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post%>
+                  </li>
+      <%end%>
+    <%end%>
    <%end%>
   <%end%>
   
