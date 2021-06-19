@@ -1,6 +1,6 @@
 # README
 
-This application is plataform for interacting with friends with chat messages.
+This application is platform for interacting with friends using chat messages.
 
 Deploy - is currently broken due to redis server issues.
 
